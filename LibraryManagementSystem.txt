@@ -1,0 +1,81 @@
+import time
+class Library:
+
+    def __init__(self,listOfBooks,libraryName):
+        self.listOfBooks=listOfBooks
+        self.libraryName=libraryName
+        self.dict1={}
+
+
+    def displayBook(self):
+        print("\n Books Available in the Library are : \n")
+        time.sleep(1)
+        print("\n".join(self.listOfBooks))
+
+    def lendBook(self,user,Book):
+        if Book in self.listOfBooks:
+            if Book in self.dict1.keys():
+                print(f"\nSorry {user} ,\"{Book}\" is not currently available in "
+                      f"{self.libraryName}.It is already being used by {self.dict1[Book]}")
+                print("Will see you next time!!!\n")
+            else:
+                self.dict1[Book] = user
+                print("Lended-book database updated and the book has been issued to you : ")
+        else:
+            print(f"Sorry {user}, this book is not available in {self.libraryName}\n")
+            print("See you next time!!!")
+
+    def addbook(self,user,Book):
+
+        self.listOfBooks.append(Book)
+        print(f"Thank you {user} !! \"{Book}\" has been added to the library.")
+
+    def Returnbook(self,user,Book):
+        self.dict1.pop(Book)
+        print("Returned Successfully")
+
+def main():
+    ch1="c"
+    object1=Library(["Subconcious mind","C++ basics","Python","java","C","Html",
+            "Power","Ikigai","You","The monk"],"Sneha_Library" )
+    print("*****Library Management System*****")
+    time.sleep(1)
+    print("******Welcome to the Library******")
+    time.sleep(1)
+    while(True):
+        if ch1=="c" or ch1=="C":
+            print("\nPress 1 if you want to Display the books in the library \n"
+              "Press 2 if you want to Lend book\n"
+              "Press 3 if you want to Add book\n"
+              "press 4 if you want to Return book\n")
+            choice=int(input("Enter your choice : "))
+            if choice==1:
+                object1.displayBook()
+            elif choice==2:
+                print("Please Enter your name : ", end="")
+                user = input()
+                print("Which book do you want to lend : ", end="")
+                Book = input()
+                object1.lendBook(user,Book)
+            elif choice==3:
+                print("Please,Enter your name : ", end="")
+                user = input()
+                print(f"Which book do you want to give to add : ", end="")
+                Book = input()
+                object1.addbook(user,Book)
+            elif choice==4:
+                print("Please Enter your name : ", end="")
+                user = input()
+                print("Which book do you want to return : ", end="")
+                Book = input()
+                object1.Returnbook(user,Book)
+            else:
+                print("Wrong Choice!!Try again")
+            print("Press \"c\" to continue and Enter to exit : ", end="")
+            ch1 = input()
+        else:
+            break
+    print("Will meet you next time!!!")
+
+if __name__=='__main__':
+    main()
